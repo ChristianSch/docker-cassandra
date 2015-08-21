@@ -17,20 +17,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "docker" do |d|
   end
 
-$script = <<SCRIPT
-apt-get install -q -y git make
-git clone https://github.com/nicolasff/docker-cassandra.git
-cd docker-cassandra
-sudo cp install/bin/pipework /usr/bin/
-make image VERSION=1.2.13
-./start-cluster.sh 1.2.13 1
-SCRIPT
+  $script = <<SCRIPT
+  apt-get install -q -y git make
+  git clone https://github.com/nicolasff/docker-cassandra.git
+  cd docker-cassandra
+  sudo cp install/bin/pipework /usr/bin/
+  make image VERSION=2.0.3
+  ./start-cluster.sh 2.0.3 1
+  SCRIPT
 
   # create one container for cassandra
   config.vm.provision :shell, :inline => $script
 
   # forward guest ports to local ports
-  [9160,7199].each do |port|
+  [9160,9042].each do |port|
     config.vm.network :forwarded_port, :host => port, :guest => port
   end
 
