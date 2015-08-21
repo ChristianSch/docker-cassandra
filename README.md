@@ -1,5 +1,5 @@
-Docker setup for Apache Cassandra
-=================================
+Vagrant/Docker setup for Apache Cassandra
+=========================================
 
 This repository contains a set of scripts and configuration files to run a Cassandra cluster
 from [Docker](https://www.docker.io/) containers. The current version of this repository is
@@ -15,7 +15,7 @@ Cassandra nodes are created with their own IP address and configured hostname:
     Starting node 1
     Starting node 2
     Starting node 3
-    
+
     $ ./client.sh 2.0.3 nodetool -h cass1 status
     Datacenter: datacenter1
     =======================
@@ -32,6 +32,8 @@ The shell scripts all assume that you have `sudo` privilege.
 
 Getting started
 ---------------
+Note: to run this docker image via Vagrant, simply run `vagrant up --provision` to start
+things up. Cassandra can be reached via `127.0.0.1` on the ports `9160` and `9042`.`.
 
 ### 1. Check out this repository
 
@@ -69,9 +71,9 @@ Run `sudo docker ps` to list your Cassandra nodes:
 
     $ sudo docker ps
     ID                  IMAGE               COMMAND                CREATED             STATUS              PORTS
-    99d67692f535        cassandra:2.0.3    /usr/bin/start-cassa   10 minutes ago      Up 10 minutes       49332->9160         
-    fe7e2b13cb9e        cassandra:2.0.3    /usr/bin/start-cassa   10 minutes ago      Up 10 minutes       49331->9160         
-    f21da380b00c        cassandra:2.0.3    /usr/bin/start-cassa   10 minutes ago      Up 10 minutes       49330->9160  
+    99d67692f535        cassandra:2.0.3    /usr/bin/start-cassa   10 minutes ago      Up 10 minutes       49332->9160
+    fe7e2b13cb9e        cassandra:2.0.3    /usr/bin/start-cassa   10 minutes ago      Up 10 minutes       49331->9160
+    f21da380b00c        cassandra:2.0.3    /usr/bin/start-cassa   10 minutes ago      Up 10 minutes       49330->9160
 
 ### 5. Connect to your cluster
 
@@ -86,7 +88,7 @@ with IP `192.168.100.254`, the next one `cass253`, etc. Names are reused when cl
 
 	$ ./stop-cluster.sh 2.0.3
     Killing and removing containers 99d67692f535 fe7e2b13cb9e f21da380b00c
-    
+
     $ sudo docker ps
     ID                  IMAGE               COMMAND             CREATED             STATUS              PORTS
 
